@@ -9,7 +9,7 @@ class PrintEditionItem {
 	}
 
 	fix() {
-		this.state = state * 1, 5;
+		this.state = state * 1.5;
 	}
 
 	set state(stateNubmer) {
@@ -124,12 +124,13 @@ class Student {
 		}
 		return this.marks[discipline].reduce((a, b) => (a + b)) / this.marks[discipline].length;
 	}
+
+  getAverage() {
+    if (Object.keys(this.marks).length > 0) {
+      let sum = Object.entries(this.marks).reduce((acc, [item]) => acc += this.getAverageBySubject(item), 0);
+      return sum / Object.keys(this.marks).length;
+    } else return 0
+  }
 }
 
-getAverage() {
-	if (Object.keys(this.marks).length > 0) {
-		let sum = Object.entries(this.marks).reduce((acc, [item]) => acc += this.getAverageBySubject(item), 0);
-		return sum / Object.keys(this.marks).length;
-	} else return 0
-}
-}
+
