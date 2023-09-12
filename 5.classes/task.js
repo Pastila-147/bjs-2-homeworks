@@ -85,10 +85,10 @@ class Library {
 	}
 
 	giveBookByName(bookName) {
-    const book = this.findBookBy("name", bookName);
-    if (!book) return null;
-    this.books = this.books.filter((item) => item.name !== bookName);
-    return book;
+		const book = this.findBookBy("name", bookName);
+		if (!book) return null;
+		this.books = this.books.filter((item) => item.name !== bookName);
+		return book;
 	}
 }
 
@@ -102,7 +102,7 @@ class Student {
 			this.marks = {}
 	}
 
-	addMark (mark, discipline) {
+	addMark(mark, discipline) {
 		if (mark < 2 || mark > 5) {
 			return console.log("Ошибка в оценке");
 		} else {
@@ -111,25 +111,23 @@ class Student {
 		}
 	}
 
-  addDiscipline(discipline){
-    if (this.marks[discipline] == undefined) {
-      this.marks[discipline] = [];
-    }
-  }
+	addDiscipline(discipline) {
+		if (this.marks[discipline] == undefined) {
+			this.marks[discipline] = [];
+		}
+	}
 
 	getAverageBySubject(discipline) {
-    if (this.marks[discipline] == undefined || this.marks[discipline].length === 0) {
-      return 0
-    }
+		if (this.marks[discipline] == undefined || this.marks[discipline].length === 0) {
+			return 0
+		}
 		return this.marks[discipline].reduce((a, b) => (a + b)) / this.marks[discipline].length;
 	}
 
-  getAverage() {
-    if (Object.keys(this.marks).length > 0) {
-      let sum = Object.entries(this.marks).reduce((acc, [item]) => acc += this.getAverageBySubject(item), 0);
-      return sum / Object.keys(this.marks).length;
-    } else return 0
-  }
+	getAverage() {
+		if (Object.keys(this.marks).length > 0) {
+			let sum = Object.entries(this.marks).reduce((acc, [item]) => acc += this.getAverageBySubject(item), 0);
+			return sum / Object.keys(this.marks).length;
+		} else return 0
+	}
 }
-
-
