@@ -85,14 +85,10 @@ class Library {
 	}
 
 	giveBookByName(bookName) {
-		let index = this.books.findIndex((book) => book.name === bookName);
-		if (index != -1) {
-			let result = this.books[index];
-			this.books.splice([index], [1]);
-			return result;
-		} else {
-			return null;
-		}
+    const book = this.findBookBy("name", bookName);
+    if (!book) return null;
+    this.books = this.books.filter((item) => item.name !== bookName);
+    return book;
 	}
 }
 
@@ -103,25 +99,28 @@ class Student {
 		this.name = name,
 			this.gender = gender,
 			this.age = age,
-			this.marks = []
+			this.marks = {}
 	}
 
-	addMarks(mark, discipline) {
-		if (mark < 1 || mark > 5) {
+	addMark (mark, discipline) {
+		if (mark < 2 || mark > 5) {
 			return console.log("Ошибка в оценке");
-		} else if (this.marks[discipline] != undefined) {
-			this.marks[discipline].push(mark);
 		} else {
 			this.addDiscipline(discipline);
 			this.marks[discipline].push(mark);
 		}
-
 	}
 
+  addDiscipline(discipline){
+    if (this.marks[discipline] == undefined) {
+      this.marks[discipline] = [];
+    }
+  }
+
 	getAverageBySubject(discipline) {
-		if (this.marks[discipline].length === 0) {
-			return 0;
-		}
+    if (this.marks[discipline] == undefined || this.marks[discipline].length === 0) {
+      return 0
+    }
 		return this.marks[discipline].reduce((a, b) => (a + b)) / this.marks[discipline].length;
 	}
 
